@@ -1,0 +1,47 @@
+.signup-wrapper {
+  background: linear-gradient(to bottom right, #6a11cb, #2575fc, #ff6f61);
+  animation: gradientFade 10s ease infinite alternate;
+}
+
+@keyframes gradientFade {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+.bg-glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.animated-card {
+  animation: slideIn 1s ease;
+  max-width: 400px;
+  width: 90%;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.btn-gradient {
+  background: linear-gradient(to right, #ff512f, #dd2476);
+  color: white;
+  transition: transform 0.2s ease, box-shadow 0.3s;
+}
+
+.btn-gradient:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(255, 80, 100, 0.7);
+}

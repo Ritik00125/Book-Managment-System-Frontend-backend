@@ -1,0 +1,62 @@
+.book-footer {
+  background: linear-gradient(135deg, #2b5876, #4e4376);
+  color: #fff;
+  padding: 3rem 1rem;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.footer-container h6 {
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.footer-brand img.footer-logo {
+  width: 50px;
+  margin-bottom: 0.5rem;
+}
+
+.footer-brand h5 {
+  font-weight: bold;
+  margin-top: 0.5rem;
+}
+
+.footer-links,
+.footer-contact {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links li,
+.footer-contact li {
+  margin-bottom: 0.5rem;
+}
+
+.footer-links li a {
+  color: #f1f1f1;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.footer-links li a:hover {
+  text-decoration: underline;
+  color: #ffd700;
+}
+
+.footer-social {
+  margin-top: 1rem;
+}
+
+.footer-social a {
+  color: #fff;
+  font-size: 1.2rem;
+  margin-right: 0.8rem;
+  transition: 0.3s ease;
+}
+
+.footer-social a:hover {
+  color: #ffd700;
+}
+
+hr {
+  border-color: rgba(255, 255, 255, 0.2);
+}

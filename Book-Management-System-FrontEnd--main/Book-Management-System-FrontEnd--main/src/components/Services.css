@@ -1,0 +1,55 @@
+.services-section {
+  background: linear-gradient(135deg, #dcdc2c, #e79f40);
+  min-height: 100vh;
+  padding: 4rem 0;
+}
+
+/* Card animations */
+.service-card {
+  border-radius: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Card image */
+.service-card img {
+  height: 220px;
+  object-fit: cover;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+/* Animations */
+.animation-slide-in {
+  animation: slideIn 1s ease;
+}
+
+.animation-zoom-in {
+  animation: zoomIn 0.8s ease;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
