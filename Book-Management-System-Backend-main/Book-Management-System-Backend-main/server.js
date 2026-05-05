@@ -1,14 +1,11 @@
 const express = require("express");
 const mongoose = require("mongoose");
-require("dotenv").config({ debug: false });
+require("dotenv").config();
 const router = require("./routes/BookRouter");
-
 const cors = require("cors");
 
-mongoose.set("strictQuery", false);
-mongoose.Promise = global.Promise;
-
 const app = express();
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -16,9 +13,10 @@ app.use(
   cors({
     origin: "*",
     credentials: false,
-  })
+  }),
 );
 
+// ✅ Test route
 app.get("/", (req, res) => {
   res.json({
     name: "Book Management System API",
@@ -32,16 +30,7 @@ app.get("/health", (req, res) => {
 
 app.use("/", router);
 
-if (!process.env.MONGO_URI) {
-  throw new Error("MONGO_URI is not defined");
-}
-
-if (process.env.NODE_ENV === "production" && !process.env.JWT_SECRET) {
-  throw new Error("JWT_SECRET is not defined");
-}
-
-const port = process.env.PORT || 4000;
-
+// ✅ Error handler
 app.use((error, req, res, next) => {
   res.status(500).json({
     success: false,
@@ -50,15 +39,24 @@ app.use((error, req, res, next) => {
   });
 });
 
+// ✅ PORT (Railway compatible)
+const PORT = process.env.PORT || 8080;
+
+// ❗ MongoDB connect + server start
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
-    console.log("Mongodb connected successfully");
-    app.listen(port, () => {
-      console.log(`Server is listening on port ${port}`);
+    console.log("MongoDB connected successfully");
+
+    app.listen(PORT, "0.0.0.0", () => {
+      console.log(`Server running on port ${PORT}`);
     });
   })
   .catch((error) => {
-    console.error("Failed to start server", error);
-    process.exit(1);
+    console.error("MongoDB connection failed:", error.message);
+
+    // ❗ Important: server still start ho jaye (debug ke liye)
+    app.listen(PORT, "0.0.0.0", () => {
+      console.log(`Server running without DB on port ${PORT}`);
+    });
   });
