@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./login.css"; // Reuse `signup.css` if same styles are used
-import axios from "axios";
 import Swal from "sweetalert2";
+import { apiClient } from "../../config/api";
 
 const Login = () => {
   const [form, setForm] = useState({
@@ -19,7 +19,7 @@ const Login = () => {
   e.preventDefault();
 
   try {
-    const response = await axios.post("http://localhost:4000/login", form);
+    const response = await apiClient.post("/login", form);
 
     console.log("Login Success:", response.data);
 

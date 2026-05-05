@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 
 const Login = async (req, res) => {
 
-  const key = "shamshad786@"; // Consider storing in process.env.JWT_SECRET
+  const key = process.env.JWT_SECRET || "development-jwt-secret";
   try {
     const { email, password } = req.body;
 
@@ -38,7 +38,6 @@ const Login = async (req, res) => {
 
     // Create JWT token
     const token = jwt.sign(metaData, key, { expiresIn: "30d" });
-   console.log(token)
     // Send success response
     return res.status(200).json({
       token,

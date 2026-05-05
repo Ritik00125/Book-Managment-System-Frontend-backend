@@ -1,9 +1,9 @@
 const express = require("express");
 const mongoose = require("mongoose");
+require("dotenv").config({ debug: false });
 const router = require("./routes/BookRouter");
 
 const cors = require("cors");
-require("dotenv").config({ debug: false });
 
 mongoose.set("strictQuery", false);
 mongoose.Promise = global.Promise;
@@ -26,10 +26,18 @@ app.get("/", (req, res) => {
   });
 });
 
+app.get("/health", (req, res) => {
+  res.json({ status: "ok" });
+});
+
 app.use("/", router);
 
 if (!process.env.MONGO_URI) {
-  throw new Error("MONGO_URI is not defined in .env");
+  throw new Error("MONGO_URI is not defined");
+}
+
+if (process.env.NODE_ENV === "production" && !process.env.JWT_SECRET) {
+  throw new Error("JWT_SECRET is not defined");
 }
 
 const port = process.env.PORT || 4000;
@@ -47,7 +55,7 @@ mongoose
   .then(() => {
     console.log("Mongodb connected successfully");
     app.listen(port, () => {
-      console.log(`server is connected on ${process.env.URL}:${port}`);
+      console.log(`Server is listening on port ${port}`);
     });
   })
   .catch((error) => {

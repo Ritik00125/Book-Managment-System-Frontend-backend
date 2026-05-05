@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Contactus.css"; // for animations and custom styles
-import axios from "axios";
+import { apiClient } from "../config/api";
 
 const Contactus = () => {
   const [formData, setFormData] = useState({
@@ -16,8 +16,7 @@ const Contactus = () => {
 
   const handleSubmit = async(e) => {
     e.preventDefault();
-    // Ideally, send to backend here
-    const res = await axios.post("http://localhost:4000/contact" , formData);
+    const res = await apiClient.post("/contact" , formData);
     console.log(res);
 
 

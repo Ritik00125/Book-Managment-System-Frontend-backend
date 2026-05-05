@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 
 const verifyUser = (req, res, next) => {
   const token = req.header("Authorization");
+  const jwtSecret = process.env.JWT_SECRET || "development-jwt-secret";
  
 
   if (!token) {
@@ -15,18 +16,16 @@ const verifyUser = (req, res, next) => {
   try {
     // Assuming token is like "Bearer <token>"
     const actualToken = token.split(" ")[1];
-    const decoded = jwt.verify(actualToken, "shamshad786@"); // use .env for real apps
+    const decoded = jwt.verify(actualToken, jwtSecret);
   
 
     // Attach user info to request
     req.user = decoded;
 
-    res.status(200).json({
+    return res.status(200).json({
       token,
       message : "user verified"
     })
-    // Pass to next middleware or route
-    next();
   } catch (err) {
     return res.status(400).json({
       message: "Invalid token.",

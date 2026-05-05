@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./signup.css"; // Custom CSS for animation and theming
-import axios from "axios";
 import Swal from "sweetalert2";
+import { apiClient } from "../../config/api";
 
 
 const Signup = () => {
@@ -20,7 +20,7 @@ const handleSubmit = async (e) => {
   e.preventDefault(); // Prevent page reload
 
   try {
-    const response = await axios.post("http://localhost:4000/signup", form);
+    const response = await apiClient.post("/signup", form);
     console.log("Signup Success:", response.data);
 
     // Optional: show success alert or redirect
@@ -31,7 +31,7 @@ const handleSubmit = async (e) => {
       text: "Your account has been created successfully!",
       confirmButtonColor: "#3085d6",
     });
-    setForm({ name: "", email: "", password: "" });
+    setForm({ fullName: "", email: "", password: "", username: "" });
   } catch (error) {
 
     console.log(error);
@@ -63,14 +63,14 @@ const handleSubmit = async (e) => {
               placeholder="John Doe"
               required
             />
-             <label className="form-label">user name</label>
+            <label className="form-label">user name</label>
             <input
               type="text"
               className="form-control rounded-pill"
               name="username"
               value={form.username}
               onChange={handleChange}
-              placeholder="sham@786"
+              placeholder="ritik@gmail.com"
               required
             />
           </div>
